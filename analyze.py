@@ -79,7 +79,16 @@ hyoka = ["50~", "50~30", "30~20", "20~10", "~10"]
 #評価ごとの平均文字数を格納するデータフレームを作成
 fav_mean_df = pd.DataFrame(index = hyoka, columns = ["平均文字数"])
 
+#作成したデータフレームに平均文字数を格納
+for i in hyoka:
+    df = tweets_df[tweets_df.いいね評価 == i]
+    fav_mean_df.loc[[i],["平均文字数"]] = df["文字数"].mean()
 
+#グラフを描写
+fav_mean_df.plot.bar(figsize=(16,9))
+
+#描写したグラフを保存
+plt.savefig("平均ツイート文字数.png")
 
 
 
