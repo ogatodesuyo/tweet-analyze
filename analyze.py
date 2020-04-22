@@ -33,7 +33,7 @@ tweets_df.plot.hist( y=["いいね"], bins=50, figsize=(16,9))
 
 
 #グラフを保存
-plt.savefig("histogram.png")
+plt.savefig("ヒストグラム.png")
 
 #時間データから日付や分数を取り除く
 tweets_df["時間"] = pd.to_datetime(tweets_df["時間"])
