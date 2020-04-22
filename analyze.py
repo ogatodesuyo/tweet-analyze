@@ -23,7 +23,17 @@ tweets_df = tweets_df = pd.concat(combine) .sort_values(by="いいね", ascendin
 #必要データの抽出
 tweets_df = tweets_df[["ツイート本文", "リツイート", "時間", "いいね"]]
 
+#Matplotlibのグラフスタイルの設定
+plt.style.use("seaborn-pastel")
+font = {"family" : "IPAexGothic"}
+matplotlib.rc("font", **font)
 
+#グラフを描写
+tweets_df.plot.hist( y=["いいね"], bins=50, figsize=(16,9))
+
+
+#グラフを保存
+plt.savefig("histogram.png")
 
 
 
