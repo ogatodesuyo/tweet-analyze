@@ -35,6 +35,16 @@ tweets_df.plot.hist( y=["いいね"], bins=50, figsize=(16,9))
 #グラフを保存
 plt.savefig("histogram.png")
 
+#時間データから日付や分数を取り除く
+tweets_df["時間"] = pd.to_datetime(tweets_df["時間"])
+tweets_df["時刻"] = tweets_df["時間"].dt.hour
+
+#いいね数と時刻のデータフレームを作成
+time_df = tweets_df[["いいね","時刻"]]
+
+#時刻順に並び替える
+time_df = time_df.sort_values(by=["時刻"], ascending=True)
+
 
 
 
