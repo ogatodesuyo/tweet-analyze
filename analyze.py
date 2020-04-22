@@ -45,7 +45,23 @@ time_df = tweets_df[["いいね","時刻"]]
 #時刻順に並び替える
 time_df = time_df.sort_values(by=["時刻"], ascending=True)
 
+#時刻ごとにデータを集計
+grouped = time_df.groupby("時刻")
 
+#時刻ごとの平均いいね数
+mean = grouped.mean()
+
+#時刻ごとのツイート数
+size = grouped.size()
+
+#時刻ごとの平均いいね数の棒グラフを描写
+mean.plot.bar(xlim=[0,24], ylim=[0,40],figsize=(16,9))
+
+#時刻ごとのツイート数の折れ線グラフを描写
+size.plot.bar(xlim=[0,24], ylim=[0,40],figsize=(16,9))
+
+#描写したグラフを保存
+plt.savefig("時刻別平均いいね数とツイート数.png")
 
 
 
