@@ -63,6 +63,22 @@ size.plot.bar(xlim=[0,24], ylim=[0,40],figsize=(16,9))
 #描写したグラフを保存
 plt.savefig("時刻別平均いいね数とツイート数.png")
 
+#評価付け
+tweets_df.loc[tweets_df["いいね"] >= 50, "いいね評価"] = "50~"
+tweets_df.loc[(tweets_df["いいね"] < 50)  &  (tweets_df["いいね"] >= 30), "いいね評価"] = "50~30"
+tweets_df.loc[(tweets_df["いいね"] < 30)  &  (tweets_df["いいね"] >= 20), "いいね評価"] = "30~20"
+tweets_df.loc[(tweets_df["いいね"] < 20)  &  (tweets_df["いいね"] >= 10), "いいね評価"] = "20~10"
+tweets_df.loc[tweets_df["いいね"] < 10, "いいね評価"] = "~10"
+
+#各ツイートの文字数を取得
+tweets_df["文字数"] = tweets_df.ツイート本文.str.len()
+
+#評価用リストを作成
+hyoka = ["50~", "50~30", "30~20", "20~10", "~10"]
+
+#評価ごとの平均文字数を格納するデータフレームを作成
+fav_mean_df = pd.DataFrame(index = hyoka, columns = ["平均文字数"])
+
 
 
 
