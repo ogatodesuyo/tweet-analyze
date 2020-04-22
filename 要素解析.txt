@@ -1,0 +1,24 @@
+import nagisa
+
+#ツイート本文をnagisaで形態素解析する
+for text in df["ツイート本文"]:
+    #改行コードを削除
+    text = text.replace("\n", "")
+    #品詞が助詞・助動詞・補助記号・空白以外のものを形態素解析
+    words = nagisa.filter(text, filter_postags=["助詞", "助動詞","補助記号","空白"])
+    #単語を抽出し、リストに追加
+    word.extend(words.words)
+
+    #各単語の出現回数をカウントする
+    c = Counter(word)
+    #出現回数が多い単語30個を抽出しデータフレームを作成
+    count_df = pd.DataFrame(c.most_common(30), columns = ["単語","出現回数"])
+    #単語の列をインデックスに設定
+count_df = count_df.set_index("単語")
+    #出現回数が多い順に並び替える
+count_df = count_df.sort_values(by="出現回数", ascending=True)
+
+#グラフを描写
+count_df.plot.barh(y="出現回数", figsize=(10,10))
+    #グラフを保存する
+plt.savefig("出現回数の多い単語（評価:%s）.png" % i)
