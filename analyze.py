@@ -17,6 +17,11 @@ jul_df = pd.read_csv("202002tweet.csv")
 #結合
 combine = [apr_df, may_df, jun_df, jul_df]
 
+#データフレームを作成、いいね順に並び変え
+tweets_df = tweets_df = pd.concat(combine) .sort_values(by="いいね", ascending=False)
+
+#必要データの抽出
+tweets_df = tweets_df[["ツイート本文", "リツイート", "時間", "いいね"]]
 
 
 
